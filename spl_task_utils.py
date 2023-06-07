@@ -10,7 +10,7 @@ balldrop_exp = ['Baseball',
                 'Yellow Whiffle Ball',
                 'Orange Whiffle Ball']
 
-
+dim = 5
 ## production rules for each benchmark for SPL
 rule_map = {
     'nguyen-1': ['A->A+A', 'A->A-A', 'A->A*A', 'A->A/A', 
@@ -101,8 +101,9 @@ rule_map = {
                      'A->sign(S)', 'S->w1', 'S->w2', 'S->wdot', 'A->S+S', 'B->S-S']), 
 
     **dict.fromkeys(['lorenz_x', 'lorenz_y', 'lorenz_z'], 
-                    ['A->A+A', 'A->A-A', 'A->A*A', 'A->A/A', 'A->A*C', 
-                     'A->x', 'A->y', 'A->z'])
+                    ['A->A+A', 'A->A-A', 'A->0','A->A*A', 'A->-A','A->A*C' \
+                     'A->sin(A)', 'A->cos(A)']+['A->x'+str(i) for i in range(1, dim+1)]
+                    + ['A->x'+str(j) +'-'+ 'x'+str(i) for j in range(1, dim+1) for i in range(1, dim+1)] )
 }
 
 

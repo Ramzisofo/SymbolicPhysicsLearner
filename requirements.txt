@@ -2,6 +2,6 @@ numpy
 pandas
 sympy
 scipy
-contextlib
-threading
+contextlib2
+threaded
 findiff

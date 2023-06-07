@@ -11,9 +11,9 @@ warnings.filterwarnings("ignore", category=RuntimeWarning)
 warnings.filterwarnings("ignore", category=FutureWarning) 
 warnings.filterwarnings("ignore", category=DeprecationWarning) 
 
+dim = 5
 
-
-def run_spl(task, num_run, transplant_step, data_dir='data/', max_len = 50, eta = 0.9999, 
+def run_spl(task, num_run, transplant_step, data_dir='data/', max_len = 50, eta = 0.9999,
             max_module_init = 10, num_aug = 5, exp_rate = 1/np.sqrt(2), num_transplant = 20, 
             norm_threshold=1e-5, count_success = True):
     """
@@ -123,7 +123,7 @@ def run_spl(task, num_run, transplant_step, data_dir='data/', max_len = 50, eta 
             exploration_rate *= 5
 
             # check if solution is discovered. Early stop if it is. 
-            test_score = score_with_est(simplify_eq(best_solution[0]), 0, test_sample, eta = eta)[0]
+            test_score = score_with_est([simplify_eq(best_solution[0][d]) for dim in range(dim)], 0, test_sample, eta = eta)[0]
             if test_score >= 1 - norm_threshold:
                 num_success += 1
                 if discovery_time == 0:
@@ -131,9 +131,9 @@ def run_spl(task, num_run, transplant_step, data_dir='data/', max_len = 50, eta 
                     all_times.append(discovery_time)
                 break
 
-        all_eqs.append(simplify_eq(best_solution[0]))
+        all_eqs.append([simplify_eq(best_solution[0][d]) for d in range(dim)])
         print('\n{} tests complete after {} iterations.'.format(i_test+1, i_itr+1))
-        print('best solution: {}'.format(simplify_eq(best_solution[0])))
+        print('best solution: {}'.format([simplify_eq(best_solution[0][d]) for d in range(dim)]))
         print('test score: {}'.format(test_score))
         print()
     
