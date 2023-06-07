@@ -2,7 +2,7 @@
 
 # SymbolicPhysicsLearner
 
-source code and examples for Symbolic physics learner: Discovering governing equations via Monte Carlo tree search. 
+source code and examples for Symbolic physics learner: Discovering governing equations via Monte Carlo tree search, by the authors of the paper below. This repository contains some chanes of the codewhich I have experimented with
 
 ## Dependencies
 
